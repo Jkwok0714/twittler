@@ -1,10 +1,35 @@
-button {
-	background-color: #4286f4;
-	color: white;
-	float: right;
-}
-
-h1 {
-	color: #4286f4;
-	font-family: verdana;
-}
+	
+	.uiButton {
+		background-color: #4286f4;
+		color: white;
+		float: right;
+	}
+	.userButton {
+		padding: 0;
+		border: none;
+		background: none;
+		color: #4286f4;
+	}
+	h1 {
+		color: #4286f4;
+		font-family: verdana;
+	}
+	p {
+		color: #4286f4;
+		font-family: verdana;
+		font-size: 12px;
+	}
+	#tweet {
+		font-family: verdana;
+		font-size: 12px;
+	}
+	.timestamp {
+		font-size: 9px;
+		color: #b6bbc4;
+	}
+	#autoRefreshStatus {
+		font-size: 9px;
+		color: #b6bbc4;
+		font-family: verdana;
+		text-align: center;
+	}
