@@ -27,7 +27,8 @@
 
       $(document).ready(function(){
         var $body = $('#scrollbox');
-		var autoRefreshEnabled = true;
+		var autoRefreshEnabled = true; //Tracks if the tweets will update
+		var spotlightUser = ''; //Tracks if a user is highlighted
 		//var idNum = 0;
 		//var maxTweets = 200;
         //$body.html('');
@@ -39,21 +40,26 @@
 
 			var index = 0;
 			while(index <= streams.home.length - 1){
-			var tweet = streams.home[index];
-			var $tweet = $('<div class="userTweet"></div>');
-			$tweet.html('@<button class="userButton">' + tweet.user + '</button>: '
-				+ tweet.message + '<br><span class="timestamp">' + tweet.created_at + '</span>');
-			$tweet.attr('id', 'tweet'+index);
-			if ($('#tweet'+index).length === 0) $tweet.prependTo($body);
-			index += 1;
-			//idNum++;
+				var tweet = streams.home[index];
+				var $tweet = $('<div class="userTweet '+tweet.user+'"></div>');
+				$tweet.html('@<button class="userButton">' + tweet.user + '</button>: '
+					+ tweet.message + '<br><span class="timestamp">' + tweet.created_at + '</span>');
+				$tweet.attr('id', 'tweet'+index);
+				if ($('#tweet'+index).length === 0) $tweet.prependTo($body);
+				index += 1;
+				//idNum++;
 			}
+			if (spotlightUser != "") showSpotlightUser();
 		}
 		
-		function spotlightUser(user) {
-			var numTweets = $('#userTweet').length;
+		function showSpotlightUser() {
+			//var numTweets = $('#userTweet').length;
+
+			$('.userTweet').not('.'+spotlightUser).hide(200);
 		}
 		function showAllUsers() {
+			spotlightUser = '';
+			$('.userTweet').show(200);
 		}
 		
 		function clearTweets() {
@@ -79,7 +85,13 @@
 		//User buttons
 		$('#scrollbox').on('click', '.userButton',function() {
 			var user = $(this).text();
-			window.alert('I clicked on '+user+'. Total tweets: ' + $('#scrollbox').find('.userTweet').length);
+			//window.alert('I clicked on '+user+'. Total tweets: ' + $('#scrollbox').find('.userTweet').length);
+			if (spotlightUser != '') {
+				showAllUsers();
+			} else {
+				spotlightUser = user;
+				showSpotlightUser();
+			}
 			
 		});
 
