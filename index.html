@@ -8,7 +8,7 @@
   </head>
   <style>
 	
-	#uiButton {
+	.uiButton {
 		background-color: #4286f4;
 		color: white;
 		float: right;
@@ -35,20 +35,33 @@
 	.timestamp {
 		font-size: 9px;
 		color: #b6bbc4;
-		text-align: right;
+	}
+	#autoRefreshStatus {
+		font-size: 9px;
+		color: #b6bbc4;
+		font-family: verdana;
+		text-align: center;
 	}
 		
   </style>
   <body>
+	<img src="icon.png" alt="Twittler Gimp Ed." style="width:30px;height:30px;float:right;">
 	<h1 style="font-family:verdana;">Twittler</h1>
-	<p>Tweets will refresh every 5 seconds, or when manually refreshed with button.</p>
-	<button id="uiButton">Refresh Tweets</button>
-	<br><br><hr>
+	<hr>
+	
+	<p>Tweets will refresh every 10 seconds, or when manually refreshed with button.</p>
+	<button class="uiButton" id="refreshButton">Refresh Tweets</button>
+	<button class="uiButton" id="toggleRefreshButton">Toggle Auto-Refresh</button>
+	<br>
+	<span id="autoRefreshStatus">Auto-Refresh: true</span>
+	<br><hr>
 	<div id="scrollbox" style="overflow-y:scroll; height:400px;">
+	
     <script>
 
       $(document).ready(function(){
         var $body = $('#scrollbox');
+		var autoRefreshEnabled = true;
         //$body.html('');
 		
 		function refreshTweets() {
@@ -66,10 +79,18 @@
 		}
 		
 		refreshTweets();
-		setInterval(function(){ refreshTweets();}, 5000);
+		setInterval(function(){
+			if (autoRefreshEnabled) refreshTweets();
+		}, 10000);
 		
 		//Manual refresh
-		$('#uiButton').on('click', refreshTweets);
+		$('#refreshButton').on('click', refreshTweets);
+		
+		//Toggle auto refresh
+		$('#toggleRefreshButton').on('click', function() {
+			autoRefreshEnabled = !autoRefreshEnabled;
+			$('#autoRefreshStatus').text('Auto-Refresh: '+autoRefreshEnabled);
+		});
 
       });
 
