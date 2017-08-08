@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<title>Twittler</title/>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+	<link rel="sylesheet" href="styles.css">
   </head>
+  <style>
+	
+	#uiButton {
+		background-color: #4286f4;
+		color: white;
+		float: right;
+	}
+	.userButton {
+		padding: 0;
+		border: none;
+		background: none;
+		color: #4286f4;
+	}
+	h1 {
+		color: #4286f4;
+		font-family: verdana;
+	}
+	p {
+		color: #4286f4;
+		font-family: verdana;
+		font-size: 12px;
+	}
+	#tweet {
+		font-family: verdana;
+		font-size: 12px;
+	}
+	.timestamp {
+		font-size: 9px;
+		color: #b6bbc4;
+		text-align: right;
+	}
+		
+  </style>
   <body>
+	<h1 style="font-family:verdana;">Twittler</h1>
+	<p>Tweets will refresh every 5 seconds, or when manually refreshed with button.</p>
+	<button id="uiButton">Refresh Tweets</button>
+	<br><br><hr>
+	<div id="scrollbox" style="overflow-y:scroll; height:400px;">
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $body = $('#scrollbox');
+        //$body.html('');
+		
+		function refreshTweets() {
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+			var index = streams.home.length - 1;
+			while(index >= 0){
+			var tweet = streams.home[index];
+			var $tweet = $('<div></div>');
+			$tweet.html('@<button class="userButton">' + tweet.user + '</button>: '
+				+ tweet.message + '<br><span class="timestamp">' + tweet.created_at + '</span>');
+			$tweet.attr('id', 'tweet');
+			$tweet.appendTo($body);
+			index -= 1;
+			}
+		}
+		
+		refreshTweets();
+		setInterval(function(){ refreshTweets();}, 5000);
+		
+		//Manual refresh
+		$('#uiButton').on('click', refreshTweets);
 
       });
 
