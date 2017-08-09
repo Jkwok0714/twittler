@@ -2,6 +2,7 @@ $(document).ready(function() {
     var $body = $('#scrollbox');
     var autoRefreshEnabled = true; //Tracks if the tweets will update
     var spotlightUser = ''; //Tracks if a user is highlighted
+	var username; //To store a username
 
     function refreshTweets() {
 
@@ -30,6 +31,23 @@ $(document).ready(function() {
     function clearTweets() {
         $('.userTweet').remove();
     }
+	
+	function sendTweet() {
+		var tweet = {};
+		tweet.user = username;
+		tweet.message = $('#inputTweet').val();
+		$('#inputTweet').val('');
+		tweet.created_at = new Date();
+		addTweet(tweet);
+		refreshTweets();
+		
+	}
+	
+	//Prompt user for a username to tweet as and create the user
+	username = prompt('Please enter a username.');
+	if (username === null) username = "Anonymous";
+	streams.users[username] = [];
+	$('#username').text(username);
 
     //Initial refresh and interval
     refreshTweets();
@@ -39,6 +57,15 @@ $(document).ready(function() {
 
     //Manual refresh
     $('#refreshButton').on('click', refreshTweets);
+	
+	//Tweet sending
+	$('#sendButton').on('click', sendTweet);
+	
+	$("#inputTweet").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#sendButton").click();
+    }
+});
 
     //Toggle auto refresh
     $('#toggleRefreshButton').on('click', function() {

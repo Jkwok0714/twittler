@@ -17,11 +17,16 @@
 	<hr>
 	
 	<p>Tweets will refresh every 10 seconds, or when manually refreshed with button.</p>
-	<button class="uiButton" id="refreshButton">Refresh Tweets</button>
-	<button class="uiButton" id="toggleRefreshButton">Disable Auto-Refresh</button>
+	<button class="uiButton floatedButton" id="refreshButton">Refresh Tweets</button>
+	<button class="uiButton floatedButton" id="toggleRefreshButton">Disable Auto-Refresh</button>
 	<br>
 	<span id="autoRefreshStatus">Auto-Refresh: true</span>
 	<br><hr>
+	<span class="normal">Tweetling as </span><span class="normal bold" id="username"></span>
+	<span class="normal">  : </span>
+	<input type="text" id="inputTweet" maxlength="200">
+	<button class="uiButton" id="sendButton">Send</button>
+	<hr>
 	<div id="scrollbox" style="overflow-y:scroll; height:400px;">
 	
   </body>

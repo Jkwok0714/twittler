@@ -2,7 +2,6 @@
 	.uiButton {
 		background-color: #4286f4;
 		color: white;
-		float: right;
 	}
 	.userButton {
 		padding: 0;
@@ -10,11 +9,14 @@
 		background: none;
 		color: #4286f4;
 	}
+	.floatedButton {
+		float: right;
+	}
 	h1 {
 		color: #4286f4;
 		font-family: verdana;
 	}
-	p {
+	p, .normal {
 		color: #4286f4;
 		font-family: verdana;
 		font-size: 12px;
@@ -37,3 +39,7 @@
 	.selectToggle {
 		opacity: 0.5;
 	}
+	.bold {
+		font-weight: bold;
+	}
+	
