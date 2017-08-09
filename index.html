@@ -4,6 +4,7 @@
 	<title>Twittler</title/>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+	<script src="main.js"></script>
 	<link rel="stylesheet" href="styles.css">
   </head>
   <style>
@@ -17,86 +18,11 @@
 	
 	<p>Tweets will refresh every 10 seconds, or when manually refreshed with button.</p>
 	<button class="uiButton" id="refreshButton">Refresh Tweets</button>
-	<button class="uiButton" id="toggleRefreshButton">Toggle Auto-Refresh</button>
+	<button class="uiButton" id="toggleRefreshButton">Disable Auto-Refresh</button>
 	<br>
 	<span id="autoRefreshStatus">Auto-Refresh: true</span>
 	<br><hr>
 	<div id="scrollbox" style="overflow-y:scroll; height:400px;">
 	
-    <script>
-
-      $(document).ready(function(){
-        var $body = $('#scrollbox');
-		var autoRefreshEnabled = true; //Tracks if the tweets will update
-		var spotlightUser = ''; //Tracks if a user is highlighted
-		//var idNum = 0;
-		//var maxTweets = 200;
-        //$body.html('');
-		
-		function refreshTweets() {
-
-			//idNum = 0;
-			//clearTweets();
-
-			var index = 0;
-			while(index <= streams.home.length - 1){
-				var tweet = streams.home[index];
-				var $tweet = $('<div class="userTweet '+tweet.user+'"></div>');
-				$tweet.html('@<button class="userButton">' + tweet.user + '</button>: '
-					+ tweet.message + '<br><span class="timestamp">' + tweet.created_at + '</span>');
-				$tweet.attr('id', 'tweet'+index);
-				if ($('#tweet'+index).length === 0) $tweet.prependTo($body);
-				index += 1;
-				//idNum++;
-			}
-			if (spotlightUser != "") showSpotlightUser();
-		}
-		
-		function showSpotlightUser() {
-			//var numTweets = $('#userTweet').length;
-
-			$('.userTweet').not('.'+spotlightUser).hide(200);
-		}
-		function showAllUsers() {
-			spotlightUser = '';
-			$('.userTweet').show(200);
-		}
-		
-		function clearTweets() {
-			$('.userTweet').remove();
-		}
-		
-		//Initial refresh and interval
-		refreshTweets();
-		setInterval(function(){
-			if (autoRefreshEnabled) refreshTweets();
-		}, 10000);
-		
-		//Manual refresh
-		$('#refreshButton').on('click', refreshTweets);
-		
-		//Toggle auto refresh
-		$('#toggleRefreshButton').on('click', function() {
-			autoRefreshEnabled = !autoRefreshEnabled;
-			$('#autoRefreshStatus').text('Auto-Refresh: '+autoRefreshEnabled);
-		});
-		
-		
-		//User buttons
-		$('#scrollbox').on('click', '.userButton',function() {
-			var user = $(this).text();
-			//window.alert('I clicked on '+user+'. Total tweets: ' + $('#scrollbox').find('.userTweet').length);
-			if (spotlightUser != '') {
-				showAllUsers();
-			} else {
-				spotlightUser = user;
-				showSpotlightUser();
-			}
-			
-		});
-
-      });
-
-    </script>
   </body>
 </html>

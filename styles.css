@@ -19,17 +19,21 @@
 		font-family: verdana;
 		font-size: 12px;
 	}
-	#tweet {
+	.tweet {
 		font-family: verdana;
 		font-size: 12px;
 	}
 	.timestamp {
 		font-size: 9px;
 		color: #b6bbc4;
+		font-family: verdana;
 	}
 	#autoRefreshStatus {
 		font-size: 9px;
 		color: #b6bbc4;
 		font-family: verdana;
 		text-align: center;
+	}
+	.selectToggle {
+		opacity: 0.5;
 	}
